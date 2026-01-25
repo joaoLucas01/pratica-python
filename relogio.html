@@ -1,0 +1,57 @@
+<div id="relogio"></div>
+
+<div id="contador">0</div>
+<button onclick="iniciar()">Iniciar</button>
+<button onclick="pausar()">Pausar</button>
+<button onclick="resetar()">Resetar</button>
+
+<script>
+    function atualizarRelogio() {
+      const agora = new Date();
+  
+      let horas = agora.getHours();
+      let minutos = agora.getMinutes();
+      let segundos = agora.getSeconds();
+      let milissegundos = agora.getMilliseconds();
+  
+      // Coloca zero na frente se for menor que 10
+      horas = horas < 10 ? "0" + horas : horas;
+      minutos = minutos < 10 ? "0" + minutos : minutos;
+      segundos = segundos < 10 ? "0" + segundos : segundos;
+      
+  
+      document.getElementById("relogio").innerHTML =
+        horas + ":" + minutos + ":" + segundos + ":" + milissegundos;
+    }
+  
+    setInterval(atualizarRelogio, 1);
+    atualizarRelogio();
+
+   // ##############################################
+
+    let tempo = 50;      // valor do contador
+    let intervalo = null; // guarda o setInterval
+
+    function iniciar() {
+        // evita criar vários intervalos ao mesmo tempo
+        if (intervalo !== null) return;
+
+        intervalo = setInterval(() => {
+        tempo++;
+        document.getElementById("contador").innerHTML = tempo;
+        }, 1000);
+    }
+
+    function pausar() {
+        clearInterval(intervalo);
+        intervalo = null;
+    }
+
+    function resetar() {
+        pausar();
+        tempo = 0;
+        document.getElementById("contador").innerHTML = tempo;
+    }
+
+  </script>
+  
